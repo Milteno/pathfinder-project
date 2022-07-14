@@ -1,0 +1,68 @@
+#pages {
+  > * {
+    display: none;
+  }
+
+  > .active {
+    display: block;
+  }
+}
+.header__wrapper {
+  text-transform: uppercase;
+  color: $color-white;
+  font-family: $font-main;
+  font-weight: $font-black;
+}
+.header__wrapper h1 {
+  margin-bottom: 0;
+}
+.header__wrapper span {
+  float:left;
+}
+.main-nav {
+  padding-top: 2rem;
+  margin: 0 auto;
+  width: 20%;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+}
+.main-nav a {
+  color: $color-white;
+  font-size: 30px;
+  text-decoration: none;
+  font-family: $font-main;
+  font-weight: $font-semibold;
+}
+.main-nav div {
+  padding:0 1rem;
+}
+.header__wrapper {
+  background-image: url(../images/assets/background.jpg);
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-position: center center;
+  background-size: cover;
+}
+.title {
+  padding-top:20vh;
+  margin: 0 auto;
+  width: 50%;
+}
+.title .letters {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  font-size: 4vw;
+}
+.letters-below {
+  text-align: right;
+  font-size: 2vw;
+  letter-spacing: 0.5rem;
+}
+.content-wrapper {
+  background-color: $color-black;
+}
