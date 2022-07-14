@@ -7,6 +7,9 @@
     display: block;
   }
 }
+.about-wrapper {
+  margin:0 10rem;
+}
 .header__wrapper {
   text-transform: uppercase;
   color: $color-white;
@@ -56,13 +59,30 @@
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  font-size: 4vw;
+  font-size: 5rem;
 }
 .letters-below {
   text-align: right;
   font-size: 2vw;
   letter-spacing: 0.5rem;
 }
-.content-wrapper {
+.page-background {
   background-color: $color-black;
+}
+.content-wrapper {
+  text-transform: uppercase;
+  color: $color-white;
+  font-weight: $font-regular;
+  position: relative;
+}
+.journey {
+  position: absolute;
+  top: 15rem;
+  left: 30rem;
+}
+.journey h2 {
+  font-size: 4rem;
+}
+#pages {
+  margin-top: -20rem;
 }

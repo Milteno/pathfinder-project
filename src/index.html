@@ -12,49 +12,55 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div class="page-background">
+    <header class="header">
+      <div class="header__wrapper">
+        <div class="main-nav">
+          <div class="col text-center">
+            <a href="#about">ABOUT</a>
+          </div>
+          <div class="col text-center">
+            <a href="#finder">FINDER</a>
+          </div>
+        </div>
+        <div class="title col text-center">
+          <div class="letters">
+            Pathfinder
+          </div>
+          <div class="letters-below">
+            <h2>for travellers</h2>
+          </div>
+        </div>
+      </div>
+    </header>
 
-  <header class="header">
-    <div class="header__wrapper">
-      <div class="main-nav">
-        <div class="col text-center">
-          <a href="#about">ABOUT</a>
-        </div>
-        <div class="col text-center">
-          <a href="#finder">FINDER</a>
-        </div>
-      </div>
-      <div class="title col text-center">
-        <div class="letters">
-          Pathfinder
-        </div>
-        <div class="letters-below">
-          <p>for travellers</p>
-        </div>
-      </div>
+    <div id="pages">
+      <section id="about">
+        <div class="about-wrapper"></div>
+      </section>
+      <section id="finder">
+        <div class="finder-wrapper"></div>
+      </section>
     </div>
-  </header>
 
-  <div id="pages">
-    <section id="about">
-      <div class="about-wrapper container"></div>
-    </section>
-    <section id="finder">
-      <div class="finder-wrapper container"></div>
-    </section>
+    <script id="template-about-page" type="text/x-handlebars-template">
+      <div class="content-wrapper">
+        <div class="img-journey">
+          <img src="images/assets/1.jpg"/>
+        </div>
+        <div class="journey">
+          <h2>Plan your journeys</h2>
+          <h4>Pick attractions and book hotels</h4>
+        </div>
+      </div>
+    </script>
+
+    <script id="template-finder-page" type="text/x-handlebars-template">
+      <div class="content-wrapper">
+
+      </div>
+    </script>
   </div>
-
-  <script id="template-about-page" type="text/x-handlebars-template">
-    <div class="content-wrapper">
-
-    </div>
-  </script>
-
-  <script id="template-finder-page" type="text/x-handlebars-template">
-    <div class="content-wrapper">
-
-    </div>
-  </script>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
   <script src="js/app.js" type="module"></script>
