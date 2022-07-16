@@ -30,14 +30,9 @@ class Finder {
     let html = '';
     for(let row = 1; row <= 10; row++) {
       for(let col = 1; col <= 10; col++) {
-        html += '<div class=”field” data-row="' + row + '" data-col="' + col + '"></div>';
+        html += '<div class="field" data-row="' + row + '" data-col="' + col + '"></div>';
       }
     }
-
-    console.log(document.querySelector(select.finder.grid));
-    document.querySelector(select.finder.grid).innerHTML = html;
-
-
 
 
     const generatedHTML = templates.finderPage();
@@ -45,6 +40,8 @@ class Finder {
     thisFinder.dom = {};
     thisFinder.dom.wrapper = element;
     thisFinder.dom.wrapper.innerHTML = generatedHTML;
+
+    thisFinder.element.querySelector(select.finder.grid).innerHTML = html;
 
   }
   activatePage(id) {
