@@ -1,8 +1,13 @@
 .grid {
-  display:grid;
+  display:flex;
 }
+
+.grid div:nth-child(11n) {
+  float:left;
+}
+
 .field {
   border: 1px solid white;
-  width:30px;
-  height:30px;
+  width: 30px;
+  height: 30px;
 }
