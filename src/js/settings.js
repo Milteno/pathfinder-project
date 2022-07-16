@@ -19,6 +19,9 @@ export const select = {
     aboutPage: '#template-about-page',
     finderPage: '#template-finder-page',
   },
+  finder: {
+    grid: '.grid',
+  }
 };
 export const templates = {
   aboutPage: Handlebars.compile(document.querySelector(select.templateOf.aboutPage).innerHTML),

@@ -7,21 +7,31 @@
     display: block;
   }
 }
+
 .about-wrapper {
-  margin:0 10rem;
+  margin: 0 10vw;
+  letter-spacing: 0.5rem;
 }
+
 .header__wrapper {
   text-transform: uppercase;
   color: $color-white;
   font-family: $font-main;
   font-weight: $font-black;
+  -webkit-box-shadow: inset 0px -100px 45px -5px $color-black;
+  -moz-box-shadow: inset 0px -100px 45px -5px $color-black;
+  box-shadow: inset 0px -100px 45px -5px $color-black;
+
 }
+
 .header__wrapper h1 {
   margin-bottom: 0;
 }
+
 .header__wrapper span {
-  float:left;
+  float: left;
 }
+
 .main-nav {
   padding-top: 2rem;
   margin: 0 auto;
@@ -30,6 +40,7 @@
   display: flex;
   flex-direction: row;
 }
+
 .main-nav a {
   color: $color-white;
   font-size: 30px;
@@ -37,9 +48,11 @@
   font-family: $font-main;
   font-weight: $font-semibold;
 }
+
 .main-nav div {
-  padding:0 1rem;
+  padding: 0 1rem;
 }
+
 .header__wrapper {
   background-image: url(../images/assets/background.jpg);
   width: 100%;
@@ -48,11 +61,13 @@
   background-position: center center;
   background-size: cover;
 }
+
 .title {
-  padding-top:20vh;
+  padding-top: 20vh;
   margin: 0 auto;
   width: 50%;
 }
+
 .title .letters {
   width: 100%;
   text-align: center;
@@ -61,28 +76,99 @@
   justify-content: space-between;
   font-size: 5rem;
 }
+
 .letters-below {
   text-align: right;
   font-size: 2vw;
   letter-spacing: 0.5rem;
 }
+
 .page-background {
+  position: relative;
   background-color: $color-black;
 }
+
 .content-wrapper {
   text-transform: uppercase;
   color: $color-white;
   font-weight: $font-regular;
   position: relative;
+  padding-bottom: 8rem;
 }
+
+.img-journey-box {
+  width: 36vw;
+  height: 500px;
+}
+
+.img-journey {
+  width: 100%;
+  height: 100%;
+  background-image: url(../images/assets/1.jpg);
+  position: relative;
+  background-position: center center;
+  background-size: cover;
+}
+
 .journey {
   position: absolute;
-  top: 15rem;
-  left: 30rem;
+  top: 20rem;
+  left: 16vw;
+  width: auto;
 }
+
 .journey h2 {
-  font-size: 4rem;
+  font-size: 3.2rem;
 }
+
+.journey h3 {
+  font-size: 1.6rem;
+}
+
+.boredom {
+  position: absolute;
+  top: 4.5rem;
+  left: 4rem;
+}
+
+.boredom h2 {
+  font-size: 3.2rem;
+}
+
+.boredom h3 {
+  font-size: 1.6rem;
+}
+
+.img-boredom-box {
+  width: 60vw;
+  height: 600px;
+}
+
+.img-boredom {
+  float: right;
+  width: 100%;
+  height: 100%;
+  background-image: url(../images/assets/2.jpg);
+  position: relative;
+  background-position: center center;
+  background-size: cover;
+}
+
+footer {
+  position: relative;
+  text-align: center;
+  justify-content: center;
+  color: $color-white;
+  font-weight: $font-regular;
+  padding: 2rem 0 6rem 0;
+}
+
 #pages {
   margin-top: -20rem;
+}
+
+@media (max-width: 945px) {
+  .title {
+    width: 90%;
+  }
 }

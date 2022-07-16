@@ -347,3 +347,7 @@ template {
 [hidden] {
   display: none;
 }
+
+.row {
+  --bs-gutter-x: 0;
+}
