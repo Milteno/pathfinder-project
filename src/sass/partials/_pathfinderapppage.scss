@@ -2,7 +2,7 @@
   display:flex;
 }
 
-.grid div:nth-child(11n) {
+.grid div:nth-child(10n+1) {
   float:left;
 }
 
