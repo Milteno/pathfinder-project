@@ -1,6 +1,7 @@
 export const classNames = {
   pages: {
     active: 'active',
+    finder: 'active',
   },
   nav: {
     active: 'active',
@@ -21,6 +22,8 @@ export const select = {
   },
   finder: {
     grid: '.grid',
+    submitBtn: '.btnDiv',
+    field: 'field',
   }
 };
 export const templates = {

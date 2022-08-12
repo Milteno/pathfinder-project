@@ -1,13 +1,67 @@
-.grid {
-  display:flex;
+.finder-wrapper .content-wrapper h1 {
+  margin: 0 auto;
+  text-align: center;
+  margin: 2rem 0 4rem 0;
 }
 
-.grid div:nth-child(10n+1) {
-  float:left;
+.finder-wrapper .content-wrapper {
+  justify-content: center;
+}
+
+.finder-wrapper .content-wrapper button {
+  padding: 2rem 10rem;
+  text-align: center;
+}
+
+.finder-wrapper .content-wrapper .btnDiv {
+  margin: 4rem auto;
+  justify-content: center;
+  text-align: center;
+  color: black;
+
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 500px;
 }
 
 .field {
   border: 1px solid white;
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
+}
+
+.grid .active {
+  background-color: $color-orange;
+}
+
+.grid .start {
+  background-color: $color-green;
+}
+
+.grid .end {
+  background-color: $color-green;
+}
+
+.grid .end::after {
+  display: block;
+  width: 100%;
+  text-align: center;
+  content: "End";
+  color: white;
+}
+
+.grid .start::after {
+  display: block;
+  width: 100%;
+  text-align: center;
+  content: "Start";
+  color: white;
+}
+
+.grid .path {
+  background-color: lightblue !important;
 }
