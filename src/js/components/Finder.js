@@ -323,6 +323,112 @@ class Finder {
     }
   }
 
+  addAvaliableFields(row, col) {
+    if(row >= 1) {
+      let up = row;
+      up--;
+      if(up != 0 && !document.querySelector('[data-row='+ CSS.escape(up)+'][data-col='+ CSS.escape(col)+']').classList.contains(classNames.pages.active)) {
+        document.querySelector('[data-row='+ CSS.escape(up)+'][data-col='+ CSS.escape(col)+']').classList.add(select.finder.avaliableField);
+      }
+    }
+    if(row <= 10) {
+      let down = row;
+      down++;
+      if(down != 11 && !document.querySelector('[data-row='+ CSS.escape(down)+'][data-col='+ CSS.escape(col)+']').classList.contains(classNames.pages.active)) {
+        document.querySelector('[data-row='+ CSS.escape(down)+'][data-col='+ CSS.escape(col)+']').classList.add(select.finder.avaliableField);
+      }
+    }
+    if(col >= 1) {
+      let left = col;
+      left--;
+      if(left != 0 && !document.querySelector('[data-row='+ CSS.escape(row)+'][data-col='+ CSS.escape(left)+']').classList.contains(classNames.pages.active)) {
+        document.querySelector('[data-row='+ CSS.escape(row)+'][data-col='+ CSS.escape(left)+']').classList.add(select.finder.avaliableField);
+      }
+    }
+    if(col <= 10) {
+      let right = col;
+      right++;
+      if(right != 11 && !document.querySelector('[data-row='+ CSS.escape(row)+'][data-col='+ CSS.escape(right)+']').classList.contains(classNames.pages.active)) {
+        document.querySelector('[data-row='+ CSS.escape(row)+'][data-col='+ CSS.escape(right)+']').classList.add(select.finder.avaliableField);
+      }
+    }
+  }
+
+  checkFieldsClassName(row, col, className) {
+    if(row > 0 && row < 11 && col > 0 && col < 11) {
+      if(document.querySelector('[data-row='+ CSS.escape(row)+'][data-col='+ CSS.escape(col)+']').classList.contains(className)) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+    else {
+      return false;
+    }
+  }
+
+  removeAvaliableField(row, col, className) {
+    if(row > 0 && col > 0) {
+      console.log(row, col);
+      document.querySelector('[data-row='+ CSS.escape(row)+'][data-col='+ CSS.escape(col)+']').classList.remove(className);
+    }
+    else {
+      return;
+    }
+  }
+
+  removeAvaliableFields(row, col) {
+    const thisFinder = this;
+    let up = row;
+    let down = row;
+    let right = col;
+    let left = col;
+    up--;
+    down++;
+    left--;
+    right++;
+    let up2 = up;
+    let down2 = down;
+    let right2 = right;
+    let left2 = left;
+    up2--;
+    down2++;
+    left2--;
+    right2++;
+    console.log(up, down, left, right);
+    console.log(up2, down2, left2, right2);
+
+    if(up > 0) {
+      if(thisFinder.checkFieldsClassName(row-1, col-1, classNames.pages.active) == false && thisFinder.checkFieldsClassName(row-1, col+1, classNames.pages.active) == false && thisFinder.checkFieldsClassName(up2, col, classNames.pages.active) == false) {
+        thisFinder.removeAvaliableField(up, col, select.finder.avaliableField);
+        console.log('up',row,col);
+      }
+    }
+    if(down < 11) {
+      if(thisFinder.checkFieldsClassName(row+1, col-1, classNames.pages.active) == false && thisFinder.checkFieldsClassName(row+1, col+1, classNames.pages.active) == false && thisFinder.checkFieldsClassName(down2, col, classNames.pages.active) == false) {
+        thisFinder.removeAvaliableField(down, col, select.finder.avaliableField);
+        console.log('down',row,col);
+      }
+    }
+    if(left > 0) {
+      if(thisFinder.checkFieldsClassName(row-1, col-1, classNames.pages.active) == false && thisFinder.checkFieldsClassName(row+1, col-1, classNames.pages.active) == false && thisFinder.checkFieldsClassName(row, left2, classNames.pages.active) == false) {
+        thisFinder.removeAvaliableField(row, left, select.finder.avaliableField);
+        console.log('left',row,col);
+      }
+    }
+    if(right < 11) {
+      console.log('przed bledem',row,col);
+      if(thisFinder.checkFieldsClassName(row-1, col+1, classNames.pages.active) == false && thisFinder.checkFieldsClassName(row+1, col+1, classNames.pages.active) == false && thisFinder.checkFieldsClassName(up2, right2, classNames.pages.active) == false) {
+        thisFinder.removeAvaliableField(row, right, select.finder.avaliableField);
+        console.log('right',row,col);
+      }
+    }
+    if(thisFinder.queue.length != 1) {
+      document.querySelector('[data-row='+ CSS.escape(row)+'][data-col='+ CSS.escape(col)+']').classList.add(select.finder.avaliableField);
+    }
+  }
+
   toggleField(fieldElem) {
     const thisFinder = this;
 
@@ -336,14 +442,16 @@ class Finder {
     });
 
     // if field with this row and col is true -> unselect it
-    if(thisFinder.grid[field.row][field.col]) {
+    console.log(field.row,' | ',field.col, ' | ', thisFinder.queue[(thisFinder.queue.length-1)], thisFinder.queue[(thisFinder.queue.length-1)] );
 
+    if(thisFinder.queue.length != 0 && thisFinder.grid[field.row][field.col] && field.row === thisFinder.queue[thisFinder.queue.length-1].row && field.col === thisFinder.queue[thisFinder.queue.length-1].col) {
       thisFinder.grid[field.row][field.col] = false;
       fieldElem.classList.remove(classNames.pages.finder);
+      thisFinder.removeAvaliableFields(field.row, field.col);
+      thisFinder.queue.pop();
     }
 
     else {
-      // flatten object to array of values e.g. [false, false, false]
       const gridValues = Object.values(thisFinder.grid)
         .map(col => Object.values(col))
         .flat();
@@ -353,12 +461,11 @@ class Finder {
         // determine edge fields
         const edgeFields = [];
 
-        if(field.col > 1) edgeFields.push(thisFinder.grid[field.row][field.col-1]); //get field on the left value
-        if(field.col < 10) edgeFields.push(thisFinder.grid[field.row][field.col+1]); //get field on the right value
-        if(field.row > 1) edgeFields.push(thisFinder.grid[field.row-1][field.col]); //get field on the top value
+        if(field.col > 1) edgeFields.push(thisFinder.grid[field.row][field.col-1]);
+        if(field.col < 10) edgeFields.push(thisFinder.grid[field.row][field.col+1]);
+        if(field.row > 1) edgeFields.push(thisFinder.grid[field.row-1][field.col]);
         if(field.row < 10) edgeFields.push(thisFinder.grid[field.row+1][field.col]);
 
-        // if clicked field doesn't touch at least one that is already selected -> show alert and finish function
         if(!edgeFields.includes(true)) {
           alert('A new field should touch at least one that is already selected!');
           return;
@@ -367,7 +474,16 @@ class Finder {
       // select clicked field
       thisFinder.betterGrid[field.row-1][field.col-1] = 'Empty';
       thisFinder.grid[field.row][field.col] = true;
+      fieldElem.classList.remove(select.finder.avaliableField);
       fieldElem.classList.add(classNames.pages.finder);
+      thisFinder.addAvaliableFields(field.row, field.col);
+      console.log(thisFinder.queue);
+      if (thisFinder.queue.filter(e => e.row === field.row && e.col === field.col).length === 1) {
+        console.log('to pole istnieje');
+      }
+      else {
+        thisFinder.queue.push(field);
+      }
     }
   }
 

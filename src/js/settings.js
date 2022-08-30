@@ -24,6 +24,7 @@ export const select = {
     grid: '.grid',
     submitBtn: '.btnDiv',
     field: 'field',
+    avaliableField: 'avaliableField',
   }
 };
 export const templates = {
