@@ -1,19 +1,27 @@
-.finder-wrapper .content-wrapper h1 {
+.content-wrapperr {
+  text-transform: uppercase;
+  color: $color-white;
+  font-weight: $font-regular;
+  position: relative;
+  padding-bottom: 8rem;
+}
+
+.finder-wrapper .content-wrapperr h1 {
   margin: 0 auto;
   text-align: center;
   margin: 2rem 0 4rem 0;
 }
 
-.finder-wrapper .content-wrapper {
+.finder-wrapper .content-wrapperr {
   justify-content: center;
 }
 
-.finder-wrapper .content-wrapper button {
+.finder-wrapper .content-wrapperr button {
   padding: 2rem 10rem;
   text-align: center;
 }
 
-.finder-wrapper .content-wrapper .btnDiv {
+.finder-wrapper .content-wrapperr .btnDiv {
   margin: 4rem auto;
   justify-content: center;
   text-align: center;
@@ -68,5 +76,82 @@
 
 .grid .avaliableField {
   background-color: rgb(0,70,139, .5) !important;
+}
 
+.full-screen {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.9);
+  color: white;
+}
+
+.flex-container-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.white-box {
+  height: 200px;
+  background-color: fff;
+  color: 000000;
+  width: 50%;
+}
+
+.white-box h1 {
+  text-align: center;
+  flex-direction: row;
+  margin: 0 0 1rem 0;
+}
+
+.popup {
+  display: none;
+  position: absolute;
+}
+
+.popup-button {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1rem 1rem 0 0;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+}
+
+.summary-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0.2rem 25%;
+}
+
+.summary-content span:nth-child(odd) {
+  font-weight: bold;
+}
+
+.browser-only {
+  display: none;
+  height: 100vh;
+  color: fff;
+  text-align: center;
+  justify-content: center;
+  position: relative;
+  font-size: 40px;
+  font-weight: 600;
+  margin: 10rem 0;
+}
+
+.browser-only h1 {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex-direction: row;
 }

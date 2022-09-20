@@ -1,4 +1,6 @@
 import {select, templates, classNames} from '../settings.js';
+import Summary from './Summary.js';
+import WindowSizeValidator from './WindowSizeValidator.js';
 
 
 class Finder {
@@ -29,9 +31,12 @@ class Finder {
     }
 
     thisFinder.render(element);
+    console.log(element);
   }
   render(element) {
     const thisFinder = this;
+
+    console.log(element);
 
     let pageData = null;
     switch(thisFinder.step) {
@@ -42,7 +47,7 @@ class Finder {
       pageData = { title: 'Pick start and finish', btnText: 'Compute' };
       break;
     case 3:
-      pageData = { title: 'The best route is', btnText: 'Start again' };
+      pageData = { title: 'The best route is', btnText: 'Start again', fullRoute: thisFinder.queue.length, longestRoute: thisFinder.queue.length, shortestRoute: thisFinder.finalPath.length};
       break;
     }
 
@@ -62,6 +67,9 @@ class Finder {
 
     thisFinder.element.querySelector(select.finder.grid).innerHTML = html;
     thisFinder.initActions();
+
+    thisFinder.WindowSizeValidate = new WindowSizeValidator();
+    thisFinder.WindowSizeValidate.windowCheck();
   }
 
   renderProgress() {
@@ -85,6 +93,28 @@ class Finder {
     }
   }
 
+  reset() {
+    const thisFinder = this;
+    thisFinder.start = false;
+    thisFinder.end = false;
+    thisFinder.queue = [];
+    thisFinder.grid = [];
+    thisFinder.betterGrid = [];
+    for (let i = 0; i<10; i++) {
+      thisFinder.betterGrid[i] = [];
+      for (let j = 0; j<10; j++) {
+        thisFinder.betterGrid[i][j] = 'Obstacle';
+      }
+    }
+
+    for(let row = 1; row <= 10; row++) {
+      thisFinder.grid[row] = {};
+      for(let col = 1; col <= 10; col++) {
+        thisFinder.grid[row][col] = false;
+      }
+    }
+  }
+
   setStart(target) {
     const thisFinder = this;
     if(target.classList.contains(classNames.pages.active) && thisFinder.start == false) {
@@ -95,9 +125,9 @@ class Finder {
       };
       //thisFinder.grid[thisFinder.startPosition.row][thisFinder.startPosition.col] = 'start';
       thisFinder.start = true;
-      console.log(thisFinder.start);
-      console.log(thisFinder.startPosition.row);
-      console.log(thisFinder.startPosition.col);
+      //console.log(thisFinder.start);
+      //console.log(thisFinder.startPosition.row);
+      //console.log(thisFinder.startPosition.col);
     }
   }
 
@@ -111,9 +141,9 @@ class Finder {
       };
       //thisFinder.grid[thisFinder.endPosition.row][thisFinder.endPosition.col] = 'end';
       thisFinder.end = true;
-      console.log(thisFinder.end);
-      console.log(thisFinder.endPosition.row);
-      console.log(thisFinder.endPosition.col);
+      //console.log(thisFinder.end);
+      //console.log(thisFinder.endPosition.row);
+      //console.log(thisFinder.endPosition.col);
 
     }
   }
@@ -126,7 +156,7 @@ class Finder {
 
   colorizePath() {
     const thisFinder = this;
-    console.log(thisFinder.finalPath);
+    //console.log(thisFinder.finalPath);
     thisFinder.finalPath.pop();
     let currentBlock = {
       row: thisFinder.startPosition.row,
@@ -158,8 +188,8 @@ class Finder {
     const thisFinder = this;
     thisFinder.betterGrid[thisFinder.startPosition.row-1][thisFinder.startPosition.col-1] = 'Start';
     thisFinder.betterGrid[thisFinder.endPosition.row-1][thisFinder.endPosition.col-1] = 'Goal';
-    console.log(thisFinder.betterGrid);
-    console.log(thisFinder.grid);
+    //console.log(thisFinder.betterGrid);
+    //console.log(thisFinder.grid);
     thisFinder.finalPath = thisFinder.calculate();
   }
 
@@ -167,9 +197,9 @@ class Finder {
     const thisFinder = this;
 
     let distanceFromTop = thisFinder.startPosition.row-1;
-    console.log('distancefromtop',distanceFromTop);
+    //console.log('distancefromtop',distanceFromTop);
     let distanceFromLeft = thisFinder.startPosition.col-1;
-    console.log('distancefromleft',distanceFromLeft);
+    //console.log('distancefromleft',distanceFromLeft);
 
     var location = {
       distanceFromTop: distanceFromTop,
@@ -179,8 +209,8 @@ class Finder {
     };
 
     let queue = [location];
-    console.log(queue);
-    console.log(queue.length);
+    //console.log(queue);
+    //console.log(queue.length);
 
     while(queue.length > 0) {
       let currentLocation = queue.shift();
@@ -188,7 +218,7 @@ class Finder {
 
       let newLocation = thisFinder.exploreInDirection(currentLocation, 'North');
       if (newLocation.status === 'Goal') {
-        console.log(newLocation.path);
+        //console.log(newLocation.path);
         return newLocation.path;
       }
       else if (newLocation.status === 'Valid') {
@@ -197,7 +227,7 @@ class Finder {
 
       newLocation = thisFinder.exploreInDirection(currentLocation, 'East');
       if (newLocation.status === 'Goal') {
-        console.log(newLocation.path);
+        //(newLocation.path);
         return newLocation.path;
       }
       else if (newLocation.status === 'Valid') {
@@ -206,7 +236,7 @@ class Finder {
 
       newLocation = thisFinder.exploreInDirection(currentLocation, 'South');
       if (newLocation.status === 'Goal') {
-        console.log(newLocation.path);
+        //console.log(newLocation.path);
         return newLocation.path;
       }
       else if (newLocation.status === 'Valid') {
@@ -215,7 +245,7 @@ class Finder {
 
       newLocation = thisFinder.exploreInDirection(currentLocation, 'West');
       if (newLocation.status === 'Goal') {
-        console.log(newLocation.path);
+        //console.log(newLocation.path);
         return newLocation.path;
       }
       else if (newLocation.status === 'Valid') {
@@ -248,7 +278,7 @@ class Finder {
   exploreInDirection(currentLocation, direction) {
     const thisFinder = this;
     let newPath = currentLocation.path.slice();
-    console.log('newpath',newPath);
+    //console.log('newpath',newPath);
     newPath.push(direction);
     let dft = currentLocation.distanceFromTop;
     let dfl = currentLocation.distanceFromLeft;
@@ -300,6 +330,7 @@ class Finder {
       thisFinder.element.querySelector(select.finder.submitBtn).addEventListener('click', function(e) {
         e.preventDefault();
         if(thisFinder.end == true) {
+          thisFinder.createGridTable();
           thisFinder.changeStep(3);
         }
       });
@@ -313,11 +344,12 @@ class Finder {
 
     }
     else if(thisFinder.step === 3) {
-      thisFinder.renderProgress();
-      thisFinder.createGridTable();
       thisFinder.colorizePath();
+      thisFinder.renderProgress();
+      thisFinder.Summary();
       thisFinder.element.querySelector(select.finder.submitBtn).addEventListener('click', function(e) {
         e.preventDefault();
+        thisFinder.reset();
         thisFinder.changeStep(1);
       });
     }
@@ -370,7 +402,7 @@ class Finder {
 
   removeAvaliableField(row, col, className) {
     if(row > 0 && col > 0) {
-      console.log(row, col);
+      //console.log(row, col);
       document.querySelector('[data-row='+ CSS.escape(row)+'][data-col='+ CSS.escape(col)+']').classList.remove(className);
     }
     else {
@@ -396,32 +428,27 @@ class Finder {
     down2++;
     left2--;
     right2++;
-    console.log(up, down, left, right);
-    console.log(up2, down2, left2, right2);
+    //console.log(up, down, left, right);
+    //console.log(up2, down2, left2, right2);
 
     if(up > 0) {
       if(thisFinder.checkFieldsClassName(row-1, col-1, classNames.pages.active) == false && thisFinder.checkFieldsClassName(row-1, col+1, classNames.pages.active) == false && thisFinder.checkFieldsClassName(up2, col, classNames.pages.active) == false) {
         thisFinder.removeAvaliableField(up, col, select.finder.avaliableField);
-        console.log('up',row,col);
       }
     }
     if(down < 11) {
       if(thisFinder.checkFieldsClassName(row+1, col-1, classNames.pages.active) == false && thisFinder.checkFieldsClassName(row+1, col+1, classNames.pages.active) == false && thisFinder.checkFieldsClassName(down2, col, classNames.pages.active) == false) {
         thisFinder.removeAvaliableField(down, col, select.finder.avaliableField);
-        console.log('down',row,col);
       }
     }
     if(left > 0) {
       if(thisFinder.checkFieldsClassName(row-1, col-1, classNames.pages.active) == false && thisFinder.checkFieldsClassName(row+1, col-1, classNames.pages.active) == false && thisFinder.checkFieldsClassName(row, left2, classNames.pages.active) == false) {
         thisFinder.removeAvaliableField(row, left, select.finder.avaliableField);
-        console.log('left',row,col);
       }
     }
     if(right < 11) {
-      console.log('przed bledem',row,col);
       if(thisFinder.checkFieldsClassName(row-1, col+1, classNames.pages.active) == false && thisFinder.checkFieldsClassName(row+1, col+1, classNames.pages.active) == false && thisFinder.checkFieldsClassName(up2, right2, classNames.pages.active) == false) {
         thisFinder.removeAvaliableField(row, right, select.finder.avaliableField);
-        console.log('right',row,col);
       }
     }
     if(thisFinder.queue.length != 1) {
@@ -441,8 +468,9 @@ class Finder {
       field[el] = parseInt(field[el]);
     });
 
+
     // if field with this row and col is true -> unselect it
-    console.log(field.row,' | ',field.col, ' | ', thisFinder.queue[(thisFinder.queue.length-1)], thisFinder.queue[(thisFinder.queue.length-1)] );
+    //console.log(field.row,' | ',field.col, ' | ', thisFinder.queue[(thisFinder.queue.length-1)], thisFinder.queue[(thisFinder.queue.length-1)] );
 
     if(thisFinder.queue.length != 0 && thisFinder.grid[field.row][field.col] && field.row === thisFinder.queue[thisFinder.queue.length-1].row && field.col === thisFinder.queue[thisFinder.queue.length-1].col) {
       thisFinder.grid[field.row][field.col] = false;
@@ -477,14 +505,25 @@ class Finder {
       fieldElem.classList.remove(select.finder.avaliableField);
       fieldElem.classList.add(classNames.pages.finder);
       thisFinder.addAvaliableFields(field.row, field.col);
-      console.log(thisFinder.queue);
+      //console.log(thisFinder.queue);
       if (thisFinder.queue.filter(e => e.row === field.row && e.col === field.col).length === 1) {
-        console.log('to pole istnieje');
+        //console.log('to pole istnieje');
       }
       else {
         thisFinder.queue.push(field);
       }
     }
+  }
+
+  Summary() {
+    const thisApp = this;
+    thisApp.Sum = new Summary(document.querySelector(select.finder.popup));
+  }
+
+  WindowSizeValidator() {
+    const thisApp = this;
+    thisApp.WindowSizeValidate = new WindowSizeValidator();
+    thisApp.WindowSizeValidate.windowCheck();
   }
 
   activatePage(id) {

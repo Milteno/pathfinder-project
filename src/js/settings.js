@@ -21,10 +21,13 @@ export const select = {
     finderPage: '#template-finder-page',
   },
   finder: {
+    finder: 'finder',
     grid: '.grid',
     submitBtn: '.btnDiv',
     field: 'field',
     avaliableField: 'avaliableField',
+    closeButton: '.close-button',
+    popup: '.popup',
   }
 };
 export const templates = {

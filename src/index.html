@@ -34,7 +34,6 @@
         </div>
       </div>
     </header>
-
     <div id="pages">
       <section id="about">
         <div class="about-wrapper"></div>
@@ -67,14 +66,36 @@
     </script>
 
     <script id="template-finder-page" type="text/x-handlebars-template">
-      <div class="content-wrapper">
+      <div class="content-wrapperr pathfinder">
         <h1>{{ title }}</h1>
         <div class="grid">
-
         </div>
         <div class="btnDiv">
           <button>{{ btnText }}</button>
         </div>
+      </div>
+      <div class="full-screen flex-container-center popup" >
+        <div class="white-box">
+          <div class="popup-button">
+            <button class="close-button">&times;</button>
+          </div>
+          <div class="popup-header">
+            <h1>Summary</h1>
+          </div>
+          <div class="summary-content">
+            <div>
+            <span>FULL ROUTE:</span> {{ fullRoute }} <span>FIELDS</span>
+            </div>
+            <div>
+            <span>THE LONGEST ROUTE:</span> {{ longestRoute }} <span>FIELDS</span>
+            </div>
+            <div>
+            <span>THE SHORTEST ROUTE:</span> {{ shortestRoute }} <span>FIELDS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="browser-only">
       </div>
     </script>
     <footer>

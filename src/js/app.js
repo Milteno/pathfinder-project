@@ -23,6 +23,7 @@ const app = {
     for (let link of thisApp.navLinks) {
       link.addEventListener('click', function(event){
         const clickedElement = this;
+
         event.preventDefault();
 
         const id = clickedElement.getAttribute('href').replace('#', '');
@@ -46,12 +47,15 @@ const app = {
       );
     }
     window.location.hash = '#/' + pageId;
+    thisApp.currentPageId = pageId;
+
+    // thisApp.WindowSizeValidator = new WindowSizeValidator();
+    // thisApp.WindowSizeValidator.windowCheck();
 
   },
   titleLetterSpacing: function() {
     const words = document.querySelector('.letters'), wordsArray = words.innerText.split('').map(e => ' ' == e ? '<div>&nbsp</div>' : '<div>' + e + '</div>');
     words.innerHTML = wordsArray.join('');
-    console.log('ss');
   },
   initAbout: function() {
     const thisApp = this;
@@ -62,7 +66,6 @@ const app = {
   },
   initFinder: function() {
     const thisApp = this;
-
     thisApp.Finder = new Finder(document.querySelector(select.containerOf.finder));
 
   },

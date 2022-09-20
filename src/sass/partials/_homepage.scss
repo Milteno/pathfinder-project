@@ -9,8 +9,17 @@
 }
 
 .about-wrapper {
-  margin: 0 10vw;
+  margin: 2rem 10vw 0 10vw;
   letter-spacing: 0.5rem;
+  color: $color-white;
+}
+
+.content-wrapper {
+  text-transform: uppercase;
+  color: $color-white;
+  font-weight: $font-regular;
+  position: relative;
+  padding-bottom: 8rem;
 }
 
 .header__wrapper {
@@ -21,7 +30,6 @@
   -webkit-box-shadow: inset 0px -100px 45px -5px $color-black;
   -moz-box-shadow: inset 0px -100px 45px -5px $color-black;
   box-shadow: inset 0px -100px 45px -5px $color-black;
-
 }
 
 .header__wrapper h1 {
@@ -86,14 +94,6 @@
 .page-background {
   position: relative;
   background-color: $color-black;
-}
-
-.content-wrapper {
-  text-transform: uppercase;
-  color: $color-white;
-  font-weight: $font-regular;
-  position: relative;
-  padding-bottom: 8rem;
 }
 
 .img-journey-box {
@@ -170,5 +170,51 @@ footer {
 @media (max-width: 945px) {
   .title {
     width: 90%;
+  }
+
+  .img-journey-box {
+    width: 100%;
+  }
+
+  .img-boredom-box {
+    width: 100%;
+  }
+
+  .journey {
+    width: 100%;
+    top: 18rem;
+    left: 2vh;
+  }
+
+  .boredom {
+    left: 2vh;
+  }
+}
+
+@media (max-width: 498px) {
+  .letters div {
+    font-size: 2.5rem;
+  }
+
+  .letters-below {
+    font-size: 1.5rem;
+  }
+
+  .journey {
+    position: relative;
+    top: 0;
+  }
+
+  .boredom {
+    position: relative;
+    top: 0;
+  }
+
+  .boredom h2 {
+    font-size: 2.3rem;
+  }
+
+  .journey h2 {
+    font-size: 2.3rem;
   }
 }
